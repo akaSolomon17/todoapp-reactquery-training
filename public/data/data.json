@@ -1,0 +1,68 @@
+{
+    "ads":
+    [
+        {
+            "id": 1,
+            "title": "Ad 1",
+            "image":"",
+            "direct-ads":""
+        },
+        {
+            "id": 2,
+            "title": "Ad 2",
+            "image":"",
+            "direct-ads":""
+        },
+        {
+            "id": 3,
+            "title": "Ad 3",
+            "image":"",
+            "direct-ads":""
+        },
+        {
+            "id":4,
+            "title": "Ad 4",
+            "image":"",
+            "direct-ads":""
+        },
+        {
+            "id": 5,
+            "title": "Ad 5",
+            "image":"",
+            "direct-ads":""
+        }
+
+    ],
+    "todoList":[
+        {
+            "id": 1,
+            "description": "Learning 1 bla bla...",
+            "isDone": false
+        },
+        {
+            "id": 2,
+            "description": "Learning 2 bla bla...",
+            "isDone": false
+        },
+        {
+            "id": 3,
+            "description": "Learning 3 bla bla...",
+            "isDone": false
+        },
+        {
+            "id": 4,
+            "description": "Learning 4 bla bla...",
+            "isDone": false
+        },
+        {
+            "id": 5,
+            "description": "Learning 5 bla bla...",
+            "isDone": false
+        },
+        {
+            "id": 6,
+            "description": "Learning 6 bla bla...",
+            "isDone": false
+        }
+    ]
+}
