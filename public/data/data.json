@@ -37,32 +37,85 @@
         {
             "id": 1,
             "description": "Learning 1 bla bla...",
-            "isDone": false
+            "done_flag": false,
+            "delete_flag": false
         },
         {
             "id": 2,
             "description": "Learning 2 bla bla...",
-            "isDone": false
+            "done_flag": false,
+            "delete_flag": false
         },
         {
             "id": 3,
             "description": "Learning 3 bla bla...",
-            "isDone": false
+            "done_flag": false,
+            "delete_flag": false
         },
         {
             "id": 4,
             "description": "Learning 4 bla bla...",
-            "isDone": false
+            "done_flag": false,
+            "delete_flag": false
         },
         {
             "id": 5,
             "description": "Learning 5 bla bla...",
-            "isDone": false
+            "done_flag": false,
+            "delete_flag": false
         },
         {
             "id": 6,
             "description": "Learning 6 bla bla...",
-            "isDone": false
+            "done_flag": false,
+            "delete_flag": false
+        },
+        {
+            "id": 7,
+            "description": "Learning 7 bla bla...",
+            "done_flag": false,
+            "delete_flag": false
+        },{
+            "id": 8,
+            "description": "Learning 1 bla bla...",
+            "done_flag": false,
+            "delete_flag": false
+        },
+        {
+            "id": 9,
+            "description": "Learning 2 bla bla...",
+            "done_flag": false,
+            "delete_flag": false
+        },
+        {
+            "id": 10,
+            "description": "Learning 3 bla bla...",
+            "done_flag": false,
+            "delete_flag": false
+        },
+        {
+            "id": 11,
+            "description": "Learning 4 bla bla...",
+            "done_flag": false,
+            "delete_flag": false
+        },
+        {
+            "id": 12,
+            "description": "Learning 5 bla bla...",
+            "done_flag": false,
+            "delete_flag": false
+        },
+        {
+            "id": 13,
+            "description": "Learning 6 bla bla...",
+            "done_flag": false,
+            "delete_flag": false
+        },
+        {
+            "id": 14,
+            "description": "Learning 7 bla bla...",
+            "done_flag": false,
+            "delete_flag": false
         }
     ]
 }
