@@ -1,8 +1,8 @@
 export interface Ad {
     "id": number,
     "title": string,
-    "image": string,
+    "content": string,
     "direct-ads": string
 }
 
-export type Ads = Pick<Ad, 'id'|'title'|'image'>[]
+export type Ads = Pick<Ad, 'id'|'title'|'content'>[]

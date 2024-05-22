@@ -1,121 +1,211 @@
 {
-    "ads":
-    [
-        {
-            "id": 1,
-            "title": "Ad 1",
-            "image":"",
-            "direct-ads":""
-        },
-        {
-            "id": 2,
-            "title": "Ad 2",
-            "image":"",
-            "direct-ads":""
-        },
-        {
-            "id": 3,
-            "title": "Ad 3",
-            "image":"",
-            "direct-ads":""
-        },
-        {
-            "id":4,
-            "title": "Ad 4",
-            "image":"",
-            "direct-ads":""
-        },
-        {
-            "id": 5,
-            "title": "Ad 5",
-            "image":"",
-            "direct-ads":""
-        }
-
-    ],
-    "todoList":[
-        {
-            "id": 1,
-            "description": "Learning 1 bla bla...",
-            "done_flag": false,
-            "delete_flag": false
-        },
-        {
-            "id": 2,
-            "description": "Learning 2 bla bla...",
-            "done_flag": false,
-            "delete_flag": false
-        },
-        {
-            "id": 3,
-            "description": "Learning 3 bla bla...",
-            "done_flag": false,
-            "delete_flag": false
-        },
-        {
-            "id": 4,
-            "description": "Learning 4 bla bla...",
-            "done_flag": false,
-            "delete_flag": false
-        },
-        {
-            "id": 5,
-            "description": "Learning 5 bla bla...",
-            "done_flag": false,
-            "delete_flag": false
-        },
-        {
-            "id": 6,
-            "description": "Learning 6 bla bla...",
-            "done_flag": false,
-            "delete_flag": false
-        },
-        {
-            "id": 7,
-            "description": "Learning 7 bla bla...",
-            "done_flag": false,
-            "delete_flag": false
-        },{
-            "id": 8,
-            "description": "Learning 1 bla bla...",
-            "done_flag": false,
-            "delete_flag": false
-        },
-        {
-            "id": 9,
-            "description": "Learning 2 bla bla...",
-            "done_flag": false,
-            "delete_flag": false
-        },
-        {
-            "id": 10,
-            "description": "Learning 3 bla bla...",
-            "done_flag": false,
-            "delete_flag": false
-        },
-        {
-            "id": 11,
-            "description": "Learning 4 bla bla...",
-            "done_flag": false,
-            "delete_flag": false
-        },
-        {
-            "id": 12,
-            "description": "Learning 5 bla bla...",
-            "done_flag": false,
-            "delete_flag": false
-        },
-        {
-            "id": 13,
-            "description": "Learning 6 bla bla...",
-            "done_flag": false,
-            "delete_flag": false
-        },
-        {
-            "id": 14,
-            "description": "Learning 7 bla bla...",
-            "done_flag": false,
-            "delete_flag": false
-        }
-    ]
+  "ads": [
+    {
+      "id": "1",
+      "title": "Ad 1",
+      "content": "This is content of Advertise 1",
+      "direct-ads": "http://www.sample.info/channel.aspx"
+    },
+    {
+      "id": "2",
+      "title": "Ad 2",
+      "content": "This is content of Advertise 2",
+      "direct-ads": "http://www.sample.info/"
+    },
+    {
+      "id": "3",
+      "title": "Ad 3",
+      "content": "This is content of Advertise 3",
+      "direct-ads": "http://sample.com/use#cactus"
+    },
+    {
+      "id": "4",
+      "title": "Ad 4",
+      "content": "This is content of Advertise 4",
+      "direct-ads": "https://sample.net/?bottle=cat"
+    },
+    {
+      "id": "5",
+      "title": "Ad 5",
+      "content": "This is content of Advertise 5",
+      "direct-ads": "https://sample.info/pocket?airplane=stamp"
+    }
+  ],
+  "todoList": [
+    {
+      "id": "4",
+      "description": "Learning 4 bla bla...",
+      "done_flag": false
+    },
+    {
+      "id": "7",
+      "description": "Learning 7 bla bla...",
+      "done_flag": true
+    },
+    {
+      "id": "8",
+      "description": "Learning 8 bla bla...",
+      "done_flag": true
+    },
+    {
+      "id": "9",
+      "description": "Learning 9 bla bla...",
+      "done_flag": true
+    },
+    {
+      "id": "11",
+      "description": "Learning 11 bla bla...",
+      "done_flag": false
+    },
+    {
+      "id": "12",
+      "description": "Learning 12 bla bla...",
+      "done_flag": false
+    },
+    {
+      "id": "13",
+      "description": "Learning 13 bla bla...",
+      "done_flag": false
+    },
+    {
+      "id": "14",
+      "description": "Learning 14 bla bla...",
+      "done_flag": false
+    },
+    {
+      "id": "15",
+      "description": "Learning 15 bla bla...",
+      "done_flag": false
+    },
+    {
+      "id": "16",
+      "description": "Learning 16 bla bla...",
+      "done_flag": false
+    },
+    {
+      "id": "17",
+      "description": "Learning 17 bla bla...",
+      "done_flag": false
+    },
+    {
+      "id": "18",
+      "description": "Learning 18 bla bla...",
+      "done_flag": false
+    },
+    {
+      "id": "19",
+      "description": "Learning 19 bla bla...",
+      "done_flag": false
+    },
+    {
+      "description": "123 123",
+      "done_flag": true,
+      "id": "20"
+    },
+    {
+      "id": "21",
+      "description": "Learning blo ble blu",
+      "done_flag": false
+    },
+    {
+      "id": "22",
+      "description": "New todo1",
+      "done_flag": false
+    },
+    {
+      "id": "23",
+      "description": "New Tototoo2",
+      "done_flag": false
+    },
+    {
+      "id": "24",
+      "description": "To đu đu đu pì đu",
+      "done_flag": false
+    },
+    {
+      "id": "25",
+      "description": "kekeke",
+      "done_flag": false
+    },
+    {
+      "id": "49",
+      "description": "ád",
+      "done_flag": false
+    },
+    {
+      "id": "50",
+      "description": "ádasd",
+      "done_flag": false
+    },
+    {
+      "id": "51",
+      "description": "ádasd",
+      "done_flag": false
+    },
+    {
+      "id": "53",
+      "description": "zxczxc",
+      "done_flag": false
+    },
+    {
+      "id": "56",
+      "description": "zxczxc",
+      "done_flag": false
+    },
+    {
+      "id": "57",
+      "description": "zz",
+      "done_flag": true
+    },
+    {
+      "id": "58",
+      "description": "zxczxc",
+      "done_flag": true
+    },
+    {
+      "id": "59",
+      "description": "zxczxc",
+      "done_flag": false
+    },
+    {
+      "id": "60",
+      "description": "ádasd",
+      "done_flag": false
+    },
+    {
+      "id": "61",
+      "description": "qưeq",
+      "done_flag": true
+    },
+    {
+      "id": "62",
+      "description": "adasd",
+      "done_flag": false
+    },
+    {
+      "id": "63",
+      "description": "zxczxc",
+      "done_flag": false
+    },
+    {
+      "id": "64",
+      "description": "ádasd",
+      "done_flag": false
+    },
+    {
+      "id": "65",
+      "description": "zxczxc",
+      "done_flag": false
+    },
+    {
+      "id": "66",
+      "description": "zxczxc",
+      "done_flag": false
+    },
+    {
+      "id": "67",
+      "description": "áddasd",
+      "done_flag": false
+    }
+  ]
 }
