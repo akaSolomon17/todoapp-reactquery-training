@@ -1,31 +1,26 @@
-import { useQuery } from '@tanstack/react-query';
-import React, { useEffect, useState } from 'react'
-import { getAds } from '../../apis/getAds.api';
-import { Ad } from '../../types/ad.type';
+import { useContext, useEffect, useState } from 'react'
+import { useGetAllAds } from '../apis/getAllAds.api';
+import { Ad } from '../types/ad.type';
+import { AppContextType } from '../types/context.type';
+import { AppContext } from "../Context/AppProvider"
 
-interface AdsPopupProps {
-    setShowAdsPopup: (showAdsPopup: boolean) => void;
-}
+const AdsPopup = () => {
+    const { setTodoCount, isClose, setIsClose } = useContext<AppContextType>(AppContext)
+    const { allAds } = useGetAllAds();
 
-const AdsPopup = ({ setShowAdsPopup }: AdsPopupProps) => {
     const [randomAd, setRandomAd] = useState<Pick<Ad, 'title' | 'content'> | null>(null);
-    const [isClose, setIsClose] = useState<boolean>(false)
-    const { data } = useQuery({
-        queryKey: ["ads"],
-        queryFn: () => getAds()
-    });
 
     useEffect(() => {
-        if (data?.data) {
+        if (allAds?.data) {
             // Lấy một quảng cáo ngẫu nhiên từ mảng data
-            const randomIndex = Math.floor(Math.random() * data.data.length);
-            setRandomAd(data.data[randomIndex]);
+            const randomIndex = Math.floor(Math.random() * allAds?.data.length);
+            setRandomAd(allAds?.data[randomIndex]);
         }
-    }, [data]);
+    }, [allAds?.data]);
 
     const handleCloseAds = () => {
         setIsClose(true)
-        setShowAdsPopup(false);
+        setTodoCount(0);
     }
 
     return (

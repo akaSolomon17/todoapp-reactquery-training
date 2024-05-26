@@ -1,48 +1,23 @@
 import { MdEdit, MdDelete } from "react-icons/md";
 import { FaCheck } from "react-icons/fa";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { useQueryString } from "../../utils/utils";
 import { useState } from "react";
-import { getTodoList, updateTodo, deleteTodo } from "../../apis/getTodoList.api";
-import { Todo, TodoUpdate } from "../../types/todo.type";
+import { useGetTodoListByPage } from "../apis/getTodoListByPage.api";
+import { Todo, TodoUpdate } from "../types/todo.type";
+import { useUpdateTodoById } from "../apis/updateTodoById.api";
+import { useDeleteTodoById } from "../apis/deleteTodoById.api";
 
-const LIMIT = 7;
 
 const TodoList = () => {
     const [todoIdEditing, setTodoIdEditing] = useState<string | number | null>(null);
     const [newTodo, setNewTodo] = useState<TodoUpdate>({ description: "", done_flag: false });
-    const queryClient = useQueryClient();
-
-    // Get value from search params
-    const queryString: { page?: string } = useQueryString();
-    const page = Number(queryString.page) || 1;
-
-    // GET TODO LIST AND PAGINATION
-    const { data, isLoading } = useQuery({
-        queryKey: ["todoList", page],
-        queryFn: () => getTodoList(page, LIMIT)
-    });
+    const { todoByPage, isLoading } = useGetTodoListByPage()
+    const { mutate: updateMutate } = useUpdateTodoById()
+    const { mutate: deleteMutate } = useDeleteTodoById()
     // Get all key in data.data
-    const { prev, next, items: totalRecords, pages: totalPages, data: todosData } = data?.data || {};
+    const { prev, next, items: totalRecords, pages: totalPages, data: todosData } = todoByPage?.data || {};
 
-    // UPDATE TODO
-    const updateTodoMutate = useMutation({
-        mutationFn: ({ id, todo }: { id: string | number, todo: TodoUpdate }) => updateTodo(id, todo),
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['todoList'] });
-            setTodoIdEditing(null);
-        }
-    });
-
-    // DELELE TODO
-    const deleteTodoMutate = useMutation({
-        mutationFn: (id: number | string) => deleteTodo(id),
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['todoList'] });
-        }
-    })
-
+    // HANDLE EDIT TODO
     const handleEditingTodo = (todo: Todo) => {
         setTodoIdEditing(todo.id);
         setNewTodo({
@@ -63,7 +38,13 @@ const TodoList = () => {
             currentTodoValue?.done_flag !== newTodo.done_flag
             ?
             (
-                updateTodoMutate.mutate({ id, todo: newTodo })
+                updateMutate({ id, todo: newTodo }),
+                {
+                    onSuccess:
+                        () => {
+                            setTodoIdEditing(null)
+                        }
+                }
             ) : (
                 setTodoIdEditing(null) // Set id to null not to call API
             )
@@ -72,12 +53,11 @@ const TodoList = () => {
 
     const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, todo: Todo) => {
         const updatedTodo = { ...todo, done_flag: e.target.checked };
-        updateTodoMutate.mutate({ id: todo.id, todo: updatedTodo });
+        updateMutate({ id: todo.id, todo: updatedTodo });
     };
 
-    const handleDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string | number) => {
-        e.preventDefault();
-        deleteTodoMutate.mutate(id);
+    const handleDelete = (id: string | number) => {
+        deleteMutate(id);
     }
 
     return (
@@ -125,7 +105,7 @@ const TodoList = () => {
                                 )}
                                 <button
                                     className="flex delete-btn rounded-[3px] size-6 justify-center items-center bg-[#ff4c4c] hover:bg-[#ff8181]"
-                                    onClick={(e) => handleDelete(e, todo.id)}
+                                    onClick={() => handleDelete(todo.id)}
                                 >
                                     <MdDelete />
                                 </button>
@@ -136,7 +116,6 @@ const TodoList = () => {
             </table>
             <div className="flex w-[99%] text-[12px] items-center place-content-between mt-3">
                 <div className="basis-1/2">You have {totalRecords || 0} pending tasks!</div>
-                <button className="flex w-[3.5rem] h-[1.5rem] text-white size-15 bg-[#0EA5E9] hover:bg-[#7ad5ff] rounded-sm justify-center items-center">Clear all</button>
             </div>
             <div className="pagination-wrapper flex justify-center mt-3">
                 <nav aria-label='Page navigation example'>

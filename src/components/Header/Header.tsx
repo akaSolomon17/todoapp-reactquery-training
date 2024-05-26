@@ -1,56 +1,45 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { CiSquarePlus } from "react-icons/ci";
-import { addTodo, getAllTodoList } from "../../apis/getTodoList.api";
 import { Todo } from "../../types/todo.type";
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
+import { AppContext } from "../../Context/AppProvider"
+import { useGetAllTodo } from "../../apis/getAllTodo.api";
+import { useAddTodo } from "../../apis/addTodo.api";
 
 interface IChildren {
     children?: React.ReactNode
-    showAdsPopup: boolean;
-    setShowAdsPopup: (showAdsPopup: boolean) => void;
 }
 
-const Layout = ({ children, setShowAdsPopup }: IChildren) => {
+const Header = ({ children }: IChildren) => {
+    const { todoAll } = useGetAllTodo()
+    const { mutate: addTodoMutate } = useAddTodo()
+    //DEFINE APP CONTEXT
+    const { setTodoCount } = useContext(AppContext)
+
     const [description, setDescription] = useState<string>("")
-    const [todoCount, setTodoCount] = useState<number>(0); // Biến state để đếm số lượng todo đã tạo
-    const queryClient = useQueryClient()
 
-    const { mutate } = useMutation({
-        mutationFn: (body: Todo) => {
-            return addTodo(body)
-        },
+    // ADD NEW TODO
 
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['todoList'] })
-            setDescription("")
-            setTodoCount((count) => count + 1)
-        }
-    })
-    // Get the final ID of TODO
-    const { data: todoList } = useQuery({
-        queryKey: ["todoList"],
-        queryFn: () => getAllTodoList(),
-    })
+
 
     const handleSubmitAddTodo = (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
         if (description.trim() === "") return;
 
-        const lastTodoId = todoList?.data.length > 0 ? todoList?.data[todoList.data.length - 1].id : 0;
+        const lastTodoId = todoAll?.data?.length > 0 ? todoAll?.data[todoAll.data.length - 1]?.id : 0;
 
         const newTodo: Todo = {
             id: (Number(lastTodoId) + 1).toString(),
             description,
             done_flag: false,
         }
-        mutate(newTodo)
+        addTodoMutate(newTodo), {
+            onSuccess: () => {
+                setDescription("")
+                setTodoCount((count: number) => count + 1)
+            }
+        }
     }
 
-    useEffect(() => {
-        if (todoCount > 0 && todoCount % 3 === 0) {
-            setShowAdsPopup(true)
-        }
-    }, [todoCount, setShowAdsPopup]);
 
     return (
         <>
@@ -77,4 +66,4 @@ const Layout = ({ children, setShowAdsPopup }: IChildren) => {
     )
 }
 
-export default Layout
+export default Header

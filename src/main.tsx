@@ -16,12 +16,10 @@ import App from './App.tsx'
 const queryClient = new QueryClient() // Create a new client
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <Router>
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={true} />
-        <App />
-      </QueryClientProvider>
-    </Router>
-  </React.StrictMode>,
+  <Router>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={true} />
+      <App />
+    </QueryClientProvider>
+  </Router>
 )

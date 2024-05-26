@@ -14,6 +14,8 @@ export interface TodoRepsonse{
   data: Todo[]
 }
 
+export type Todos = Pick<Todo,'id'|'description'>
+
 export type TodoUpdate = Pick<Todo,'description' | 'done_flag'>
 
-export type Todos = Pick<Todo,'id'|'description'>[]
+export type TodoDelete = Pick<Todo,'id'>
