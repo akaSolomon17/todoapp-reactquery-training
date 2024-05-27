@@ -8,7 +8,7 @@ export const updateTodoById = (id: number | string, todo: TodoUpdate) => http.pu
 export const useUpdateTodoById = () =>{
     const queryClient = useQueryClient();
 
-    // UPDATE TODO
+    // UPDATE Todo
     const {data: todoUpdated, ...options} = useMutation({
         mutationFn: ({ id, todo }: { id: string | number, todo: TodoUpdate }) => updateTodoById(id, todo),
         onSuccess: () => {

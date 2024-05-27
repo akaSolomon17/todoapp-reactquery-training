@@ -1,28 +1,27 @@
 import { CiSquarePlus } from "react-icons/ci";
 import { Todo } from "../../types/todo.type";
-import { useContext, useState } from "react";
-import { AppContext } from "../../Context/AppProvider"
+import { useState } from "react";
 import { useGetAllTodo } from "../../apis/getAllTodo.api";
 import { useAddTodo } from "../../apis/addTodo.api";
-import { AppContextType } from "../../types/context.type";
+import { useGlobalActions, useTodoCount } from "../../zustand/store";
 
 interface IChildren {
     children?: React.ReactNode
 }
 
 const Header = ({ children }: IChildren) => {
+    // Define react-query APIs {data || ...options}
     const { todoAll } = useGetAllTodo()
     const todoAllData = todoAll?.data || []
     const { mutate: addTodoMutate } = useAddTodo()
 
-    //DEFINE APP CONTEXT
-    const { setTodoCount } = useContext<AppContextType>(AppContext)
+    // Define Zustand global actions
+    const actions = useGlobalActions()
+    const todoCount = useTodoCount()
+    console.log(todoCount);
 
+    // Define useState
     const [description, setDescription] = useState<string>("")
-
-    // ADD NEW TODO
-
-
 
     const handleSubmitAddTodo = (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
@@ -41,7 +40,7 @@ const Header = ({ children }: IChildren) => {
         addTodoMutate(newTodo, {
             onSuccess: () => {
                 setDescription("")
-                setTodoCount((count: number) => count + 1)
+                actions.setTodoCount(todoCount + 1)
             }
         })
 

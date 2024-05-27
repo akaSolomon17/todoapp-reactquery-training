@@ -6,20 +6,23 @@ import { useGetTodoListByPage } from "../apis/getTodoListByPage.api";
 import { Todo, TodoUpdate } from "../types/todo.type";
 import { useUpdateTodoById } from "../apis/updateTodoById.api";
 import { useDeleteTodoById } from "../apis/deleteTodoById.api";
+import { useQueryString } from "../utils/utils";
 
 
 const TodoList = () => {
     const [todoIdEditing, setTodoIdEditing] = useState<string | number | null>(null);
     const [newTodo, setNewTodo] = useState<TodoUpdate>({ description: "", done_flag: false });
-
+    const queryString: { page?: string } = useQueryString();
+    const currentPage = Number(queryString.page) || 1;
+    // React query APIs
     const { todoByPage, isLoading } = useGetTodoListByPage()
     const { mutate: updateMutate } = useUpdateTodoById()
     const { mutate: deleteMutate } = useDeleteTodoById()
 
-    // Get all key in data.data
+    // Get all data in todoByPage<TodoResponse>
     const { prev, next, items: totalRecords, pages: totalPages, data: todosData } = todoByPage?.data || {};
 
-    // Handle edit Todo
+    // Handle edit Todo<Todo>
     const handleEditingTodo = (todo: Todo) => {
         setTodoIdEditing(todo.id);
         setNewTodo({
@@ -42,14 +45,15 @@ const TodoList = () => {
                 updateMutate({ id, todo: newTodo }, {
                     onSuccess: () => { setTodoIdEditing(null) }
                 })
+            else
+                setTodoIdEditing(null) // Set id to null not to call API
         }
-        else
-            setTodoIdEditing(null) // Set id to null not to call API
+
     };
 
     const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, todo: Todo) => {
         const updatedTodo = { ...todo, done_flag: e.target.checked };
-        updateMutate({ id: todo.id, todo: updatedTodo });
+        updateMutate({ id: todo.id, todo: updatedTodo }, { onSuccess: () => { setTodoIdEditing(null) } });
     };
 
     const handleDelete = (id: string | number) => {
@@ -119,7 +123,7 @@ const TodoList = () => {
                         {prev === null ? (
                             <li>
                                 <span
-                                    className='rounded-l-lg border cursor-pointer select-none border-gray-300 bg-white px-1 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 text-sm'
+                                    className='rounded-l-lg border cursor-pointer select-none border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 text-sm'
                                 >
                                     ⇐
                                 </span>
@@ -127,7 +131,7 @@ const TodoList = () => {
                         ) : (
                             <li>
                                 <Link
-                                    className='rounded-l-lg border border-gray-300 bg-white px-1 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 text-sm'
+                                    className='rounded-l-lg border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 text-sm'
                                     to={`/todo?page=${prev}`}
                                 >
                                     ⇐
@@ -139,7 +143,7 @@ const TodoList = () => {
                             return (
                                 <li key={pageNumber}>
                                     <Link
-                                        className='border border-gray-300 px-2 leading-tight hover:bg-gray-100 hover:text-gray-700 active:text-gray-700 text-sm'
+                                        className={`border border-gray-300 px-3 leading-tight hover:bg-gray-100 hover:text-gray-700 active:text-gray-700 text-sm ${pageNumber === currentPage ? "bg-gray-300" : ""} `}
                                         to={`/todo?page=${pageNumber}`}
                                     >
                                         {pageNumber}
@@ -150,7 +154,7 @@ const TodoList = () => {
                         {next === null ? (
                             <li>
                                 <span
-                                    className='rounded-r-lg border cursor-pointer border-gray-300 bg-white px-1 text-gray-500 hover:bg-gray-100 hover:text-gray-700 text-sm'
+                                    className='rounded-r-lg border cursor-pointer border-gray-300 bg-white px-3 text-gray-500 hover:bg-gray-100 hover:text-gray-700 text-sm'
                                 >
                                     ⇒
                                 </span>
@@ -158,7 +162,7 @@ const TodoList = () => {
                         ) : (
                             <li>
                                 <Link
-                                    className='rounded-r-lg border border-gray-300 bg-white px-1 text-gray-500 hover:bg-gray-100 hover:text-gray-700 text-sm'
+                                    className='rounded-r-lg border border-gray-300 bg-white px-3 text-gray-500 hover:bg-gray-100 hover:text-gray-800 text-sm'
                                     to={`/todo?page=${next}`}
                                 >
                                     ⇒

@@ -1,19 +1,18 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useGetAllAds } from '../apis/getAllAds.api';
 import { Ad } from '../types/ad.type';
-import { AppContextType } from '../types/context.type';
-import { AppContext } from "../Context/AppProvider"
+import { useGlobalActions, useIsPopUp } from '../zustand/store';
 
 const AdsPopup = () => {
-    const { setTodoCount, isPopup, setIsPopup } = useContext<AppContextType>(AppContext)
-
+    const actions = useGlobalActions();
+    const isPopup = useIsPopUp();
     const { allAds } = useGetAllAds(isPopup);
 
     const [randomAd, setRandomAd] = useState<Pick<Ad, 'title' | 'content'> | null>(null);
 
     const handleCloseAds = () => {
-        setIsClose(true)
-        setTodoCount(0);
+        actions.setIsPopup(false)
+        actions.setTodoCount(0);
     }
 
     useEffect(() => {
@@ -24,11 +23,6 @@ const AdsPopup = () => {
             setRandomAd(allAdsData[randomIndex]);
         }
     }, [allAds]);
-
-    const handleCloseAds = () => {
-        setIsPopup(false)
-        setTodoCount(0);
-    }
 
     return (
         <div className={isPopup == false || !randomAd ? ("hidden fixed top-0 left-0 w-full h-full justify-center items-center z-50 bg-black bg-opacity-70") : ("flex fixed top-0 left-0 w-full h-full justify-center items-center z-50 bg-black bg-opacity-70")}>
