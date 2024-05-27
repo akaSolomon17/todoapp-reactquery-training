@@ -3,8 +3,8 @@ import { AppContextType } from "../types/context.type";
 
 
 export const AppContext = createContext<AppContextType>({
-  isClose: false,
-  setIsClose: () => { },
+  isPopup: false,
+  setIsPopup: () => { },
   todoCount: 0,
   setTodoCount: () => { }
 });
@@ -15,19 +15,18 @@ interface IChildren {
 
 export const AppProvider = ({ children }: IChildren) => {
   const [todoCount, setTodoCount] = useState<number>(0);
-  const [isClose, setIsClose] = useState<boolean>(true)
+  const [isPopup, setIsPopup] = useState<boolean>(false)
 
-  // console.log(todoCount);
-
+  console.log(isPopup);
   useEffect(() => {
     if (todoCount > 0 && todoCount === 3) {
-      setIsClose(false);
+      setIsPopup(true);
     }
-  }, [todoCount, setIsClose]);
+  }, [todoCount, setIsPopup]);
 
   return (
     <AppContext.Provider
-      value={{ setTodoCount, todoCount, isClose, setIsClose }}
+      value={{ setTodoCount, todoCount, isPopup, setIsPopup }}
     >
       {children}
     </AppContext.Provider>

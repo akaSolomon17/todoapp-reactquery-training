@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import { AppContext } from "../../Context/AppProvider"
 import { useGetAllTodo } from "../../apis/getAllTodo.api";
 import { useAddTodo } from "../../apis/addTodo.api";
+import { AppContextType } from "../../types/context.type";
 
 interface IChildren {
     children?: React.ReactNode
@@ -11,35 +12,37 @@ interface IChildren {
 
 const Header = ({ children }: IChildren) => {
     const { todoAll } = useGetAllTodo()
+    const todoAllData = todoAll?.data || []
     const { mutate: addTodoMutate } = useAddTodo()
+
     //DEFINE APP CONTEXT
-    const { setTodoCount } = useContext(AppContext)
+    const { setTodoCount } = useContext<AppContextType>(AppContext)
 
     const [description, setDescription] = useState<string>("")
-
-    // ADD NEW TODO
-
 
 
     const handleSubmitAddTodo = (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
         if (description.trim() === "") return;
 
-        const lastTodoId = todoAll?.data?.length > 0 ? todoAll?.data[todoAll.data.length - 1]?.id : 0;
+        const lastTodoId = todoAllData?.length > 0 ? todoAllData[todoAllData.length - 1]?.id : 0;
 
         const newTodo: Todo = {
             id: (Number(lastTodoId) + 1).toString(),
             description,
             done_flag: false,
         }
-        addTodoMutate(newTodo), {
+
+        console.log(description);
+
+        addTodoMutate(newTodo, {
             onSuccess: () => {
                 setDescription("")
                 setTodoCount((count: number) => count + 1)
             }
-        }
-    }
+        })
 
+    }
 
     return (
         <>
