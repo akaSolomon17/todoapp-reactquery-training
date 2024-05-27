@@ -7,11 +7,11 @@ import AdsPopup from "./pages/AdsPopup"
 import { AppProvider } from "./Context/AppProvider"
 
 /* Nợ:
-* Thêm reducer => đổi qua zustand bỏ reducer và context, sửa isClose-setIsClose hạn chế để tên phủ định
+* Thêm reducer => đổi qua zustand bỏ reducer và context, sửa isClose-setIsClose hạn chế để tên phủ định ✅
 * Tìm hiểu lại isFetching, isLoading...
-* Query api một cách có điều kiện => hạn chế re-fetching api
+* Query api một cách có điều kiện => hạn chế re-fetching api ✅
 * getValues & watch khác gì
-* Validate user profile
+* Validate user profile ✅
 */
 
 function App() {

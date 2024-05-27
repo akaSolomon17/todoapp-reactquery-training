@@ -16,7 +16,7 @@ const TodoList = () => {
     const { mutate: updateMutate } = useUpdateTodoById()
     const { mutate: deleteMutate } = useDeleteTodoById()
 
-    // Get all keys in data.data
+    // Get all key in data.data
     const { prev, next, items: totalRecords, pages: totalPages, data: todosData } = todoByPage?.data || {};
 
     // Handle edit Todo
@@ -35,21 +35,16 @@ const TodoList = () => {
         const currentTodoValue = todosData?.find((todo: Todo) => todo.id === id);
 
         // Compare current value with newValue to avoid call API
-        currentTodoValue &&
-            currentTodoValue?.description !== newTodo.description ||
-            currentTodoValue?.done_flag !== newTodo.done_flag
-            ?
-            (
-                updateMutate({ id, todo: newTodo }),
-                {
-                    onSuccess:
-                        () => {
-                            setTodoIdEditing(null)
-                        }
-                }
-            ) : (
-                setTodoIdEditing(null) // Set id to null not to call API
-            )
+        if (currentTodoValue) {
+            const isDescriptionChanged = currentTodoValue.description !== newTodo.description || currentTodoValue.done_flag !== newTodo.done_flag;
+
+            if (isDescriptionChanged)
+                updateMutate({ id, todo: newTodo }, {
+                    onSuccess: () => { setTodoIdEditing(null) }
+                })
+        }
+        else
+            setTodoIdEditing(null) // Set id to null not to call API
     };
 
     const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, todo: Todo) => {

@@ -1,6 +1,6 @@
 export interface AppContextType {
-    isClose: boolean,
+    isPopup: boolean,
+    setIsPopup: React.Dispatch<React.SetStateAction<boolean>>,
     todoCount: number,
-    setIsClose: React.Dispatch<React.SetStateAction<boolean>>,
     setTodoCount: React.Dispatch<React.SetStateAction<number>>;
 }
