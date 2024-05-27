@@ -10,16 +10,13 @@ interface IChildren {
 }
 
 const Header = ({ children }: IChildren) => {
-    const { todoAll } = useGetAllTodo()
-    const { mutate: addTodoMutate } = useAddTodo()
     //DEFINE APP CONTEXT
     const { setTodoCount } = useContext(AppContext)
 
+    const { todoAll } = useGetAllTodo()
+    const { mutate: addTodoMutate } = useAddTodo()
+
     const [description, setDescription] = useState<string>("")
-
-    // ADD NEW TODO
-
-
 
     const handleSubmitAddTodo = (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
@@ -39,7 +36,6 @@ const Header = ({ children }: IChildren) => {
             }
         }
     }
-
 
     return (
         <>

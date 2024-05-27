@@ -11,13 +11,15 @@ import { useDeleteTodoById } from "../apis/deleteTodoById.api";
 const TodoList = () => {
     const [todoIdEditing, setTodoIdEditing] = useState<string | number | null>(null);
     const [newTodo, setNewTodo] = useState<TodoUpdate>({ description: "", done_flag: false });
+
     const { todoByPage, isLoading } = useGetTodoListByPage()
     const { mutate: updateMutate } = useUpdateTodoById()
     const { mutate: deleteMutate } = useDeleteTodoById()
-    // Get all key in data.data
+
+    // Get all keys in data.data
     const { prev, next, items: totalRecords, pages: totalPages, data: todosData } = todoByPage?.data || {};
 
-    // HANDLE EDIT TODO
+    // Handle edit Todo
     const handleEditingTodo = (todo: Todo) => {
         setTodoIdEditing(todo.id);
         setNewTodo({
@@ -48,7 +50,6 @@ const TodoList = () => {
             ) : (
                 setTodoIdEditing(null) // Set id to null not to call API
             )
-
     };
 
     const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>, todo: Todo) => {

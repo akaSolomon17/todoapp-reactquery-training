@@ -10,6 +10,11 @@ const AdsPopup = () => {
 
     const [randomAd, setRandomAd] = useState<Pick<Ad, 'title' | 'content'> | null>(null);
 
+    const handleCloseAds = () => {
+        setIsClose(true)
+        setTodoCount(0);
+    }
+
     useEffect(() => {
         if (allAds?.data) {
             // Lấy một quảng cáo ngẫu nhiên từ mảng data
@@ -17,11 +22,6 @@ const AdsPopup = () => {
             setRandomAd(allAds?.data[randomIndex]);
         }
     }, [allAds?.data]);
-
-    const handleCloseAds = () => {
-        setIsClose(true)
-        setTodoCount(0);
-    }
 
     return (
         <div className={isClose || !randomAd ? ("hidden fixed top-0 left-0 w-full h-full justify-center items-center z-50 bg-black bg-opacity-70") : ("flex fixed top-0 left-0 w-full h-full justify-center items-center z-50 bg-black bg-opacity-70")}>

@@ -8,17 +8,17 @@ const LIMIT = 7;
 export const getTodoListByPage = (page:number | string, limit: number|string) => 
   http.get<TodoRepsonse>('todoList',{
     params:{
-        _page: page,
-        _per_page: limit
+      _page: page,
+      _per_page: limit
     }
   })
 
+// GET TODO LIST BY PAGE
 export const useGetTodoListByPage = () => {
-  // Get value from search params
+  // Get TodoList from search params
   const queryString: { page?: string } = useQueryString();
   const page = Number(queryString.page) || 1;
 
-  // GET TODO LIST AND PAGINATION
   const {data: todoByPage,...options} = useQuery({
     queryKey: ["todoList", page],
     queryFn: () => getTodoListByPage(page, LIMIT),

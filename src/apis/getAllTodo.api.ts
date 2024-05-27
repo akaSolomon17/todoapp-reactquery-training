@@ -3,7 +3,7 @@ import http from "../utils/http"
 
 export const getAllTodo = () => http.get('todoList') // get all record to calc totalPage for pagination
      
-     // Get the final ID of TODO
+// Get all Todo
 export const useGetAllTodo = ()=>{
     const {data: todoAll, ...options} = useQuery({
         queryKey: ["todoList"],

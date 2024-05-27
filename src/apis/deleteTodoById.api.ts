@@ -4,7 +4,7 @@ import { TodoDelete } from "../types/todo.type";
 
 export const deleteTodo = (id:number|string) => http.delete<TodoDelete>(`todoList/${id}`)
 
-// DELELE TODO
+// DELELE Todo
 export const useDeleteTodoById = () =>{
     const queryClient = useQueryClient();
 
