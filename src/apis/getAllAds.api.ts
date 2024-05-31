@@ -6,10 +6,9 @@ export const getAllAds = () => http.get<Ads>('ads')
 
 //GET all Ads
 export const useGetAllAds = (shouldFetchAds: boolean)=>{
-    const { data: allAds, ...options } = useQuery({
+    return useQuery({
         queryKey: ["ads"],
         queryFn: () => getAllAds(),
         enabled: shouldFetchAds
     });
-    return {allAds, ...options}
 }

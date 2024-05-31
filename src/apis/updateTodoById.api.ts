@@ -9,11 +9,10 @@ export const useUpdateTodoById = () =>{
     const queryClient = useQueryClient();
 
     // UPDATE Todo
-    const {data: todoUpdated, ...options} = useMutation({
+    return useMutation({
         mutationFn: ({ id, todo }: { id: string | number, todo: TodoUpdate }) => updateTodoById(id, todo),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['todoList'] });
         }
     });
-    return {todoUpdated, ...options}
 }

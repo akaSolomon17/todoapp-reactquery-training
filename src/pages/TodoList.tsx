@@ -14,8 +14,9 @@ const TodoList = () => {
     const [newTodo, setNewTodo] = useState<TodoUpdate>({ description: "", done_flag: false });
     const queryString: { page?: string } = useQueryString();
     const currentPage = Number(queryString.page) || 1;
+
     // React query APIs
-    const { todoByPage, isLoading } = useGetTodoListByPage()
+    const { data: todoByPage, isLoading } = useGetTodoListByPage()
     const { mutate: updateMutate } = useUpdateTodoById()
     const { mutate: deleteMutate } = useDeleteTodoById()
 
@@ -32,7 +33,7 @@ const TodoList = () => {
     };
 
     const handleEditSubmit = (e: React.FormEvent, id: string | number) => {
-        e.preventDefault();
+        // e.preventDefault();
 
         // Get current todo value
         const currentTodoValue = todosData?.find((todo: Todo) => todo.id === id);

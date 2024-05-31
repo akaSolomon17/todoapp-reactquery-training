@@ -10,19 +10,20 @@ interface IChildren {
 }
 
 const Header = ({ children }: IChildren) => {
+
     // Define react-query APIs {data || ...options}
-    const { todoAll } = useGetAllTodo()
+    const { data: todoAll } = useGetAllTodo()
     const todoAllData = todoAll?.data || []
     const { mutate: addTodoMutate } = useAddTodo()
 
     // Define Zustand global actions
     const actions = useGlobalActions()
     const todoCount = useTodoCount()
-    console.log(todoCount);
 
     // Define useState
     const [description, setDescription] = useState<string>("")
 
+    // Handle submit
     const handleSubmitAddTodo = (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
         if (description.trim() === "") return;
@@ -35,15 +36,12 @@ const Header = ({ children }: IChildren) => {
             done_flag: false,
         }
 
-        console.log(description);
-
         addTodoMutate(newTodo, {
             onSuccess: () => {
                 setDescription("")
                 actions.setTodoCount(todoCount + 1)
             }
         })
-
     }
 
     return (
@@ -57,10 +55,11 @@ const Header = ({ children }: IChildren) => {
                             name="add-todo"
                             placeholder='Add your new Todo'
                             className="w-11/12 rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-grey-600 sm:text-sm sm:leading-6"
+                            data-testid="header-input"
                             value={description}
                             onChange={(e) => { setDescription(e.target.value) }}
                         />
-                        <button onClick={handleSubmitAddTodo}>
+                        <button onClick={handleSubmitAddTodo} >
                             <CiSquarePlus className='size-12 text-sky-500 hover:text-sky-300 ' />
                         </button>
                     </div>

@@ -6,7 +6,7 @@ import { useGlobalActions, useIsPopUp } from '../zustand/store';
 const AdsPopup = () => {
     const actions = useGlobalActions();
     const isPopup = useIsPopUp();
-    const { allAds } = useGetAllAds(isPopup);
+    const { data: allAds } = useGetAllAds(isPopup);
 
     const [randomAd, setRandomAd] = useState<Pick<Ad, 'title' | 'content'> | null>(null);
 
@@ -18,6 +18,7 @@ const AdsPopup = () => {
     useEffect(() => {
         if (allAds) {
             const allAdsData = allAds?.data || []
+
             // Lấy một quảng cáo ngẫu nhiên từ mảng data
             const randomIndex = Math.floor(Math.random() * allAdsData.length);
             setRandomAd(allAdsData[randomIndex]);

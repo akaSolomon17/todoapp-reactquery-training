@@ -5,9 +5,8 @@ export const getAllTodo = () => http.get('todoList') // get all record to calc t
      
 // Get all Todo
 export const useGetAllTodo = ()=>{
-    const {data: todoAll, ...options} = useQuery({
+    return useQuery({
         queryKey: ["todoList"],
         queryFn: () => getAllTodo(),
     })
-    return {todoAll,...options}
 }

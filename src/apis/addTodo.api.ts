@@ -8,7 +8,7 @@ export const addTodo = (todo: Todo) => http.post<Todo>('/todoList', todo)
 export const useAddTodo = () =>{
     const queryClient = useQueryClient();
 
-    const { data:todoAdded, ...options } = useMutation({
+    return useMutation({
         mutationFn: (body: Todo) => {
             return addTodo(body)
         },
@@ -17,5 +17,4 @@ export const useAddTodo = () =>{
             queryClient.invalidateQueries({ queryKey: ['todoList'] })
         }
     })
-    return {todoAdded, ...options}
 }

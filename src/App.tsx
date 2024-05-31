@@ -6,13 +6,10 @@ import TodoList from "./pages/TodoList"
 import AdsPopup from "./pages/AdsPopup"
 
 /* Nợ:
-* getValues & watch khác gì
-* Tìm hiểu lại isFetching, isLoading...
-* Thêm reducer => đổi qua zustand bỏ reducer và context ✅ 
-* Sửa isClose-setIsClose hạn chế để tên phủ định ✅
-* Query api một cách có điều kiện => hạn chế re-fetching api ✅
-* Validate user profile ✅
-* refactor apis name: vì json-server không cấu trúc theo BE bình thường nên không thể refactor. ✅
+* Tìm hiểu lại Set({ isPopup }) - Get
+* Fix cancel image
+* page todo
+* editing trim()
 */
 
 function App() {

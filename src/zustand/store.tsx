@@ -1,16 +1,15 @@
-// Zustand setup
 import { create } from 'zustand';
-interface AppContextType {
+
+interface IStore {
     isPopup: boolean,
     todoCount: number,
     actions: {
         setIsPopup: (isPopup: boolean) => void,
         setTodoCount: (todoCount: number) => void;
     }
-
 }
 
-const store = create<AppContextType>((set) => ({
+const store = create<IStore>((set) => ({
     todoCount: 0,
     isPopup: false,
     actions: {
@@ -24,7 +23,7 @@ const store = create<AppContextType>((set) => ({
     }
 }))
 
-// 
+// VARIABLES
 export const useIsPopUp = () => store(state => state.isPopup);
 export const useTodoCount = () => store(state => state.todoCount);
 

@@ -8,12 +8,11 @@ export const deleteTodo = (id:number|string) => http.delete<TodoDelete>(`todoLis
 export const useDeleteTodoById = () =>{
     const queryClient = useQueryClient();
 
-    const {data: todoDeleted, ...options} = useMutation({
+    return useMutation({
         mutationFn: (id: number | string) => deleteTodo(id),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['todoList'] });
         }
     })
-    return {todoDeleted, ...options}
 }
 

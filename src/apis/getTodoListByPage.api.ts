@@ -19,16 +19,14 @@ export const useGetTodoListByPage = () => {
   const queryString: { page?: string } = useQueryString();
   const page = Number(queryString.page) || 1;
 
-  const {data: todoByPage,...options} = useQuery({
+  return useQuery({
     queryKey: ["todoList", page],
     queryFn: () => getTodoListByPage(page, LIMIT),
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
-  
-  return {todoByPage , ...options}
 }
 
-  
+
 
 
 
